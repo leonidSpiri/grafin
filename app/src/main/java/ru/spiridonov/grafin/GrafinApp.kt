@@ -17,7 +17,7 @@ class GrafinApp:Application() {
     }
 
     companion object{
-        lateinit  var appContext: Context
+        lateinit var appContext: Context
     }
 
 }

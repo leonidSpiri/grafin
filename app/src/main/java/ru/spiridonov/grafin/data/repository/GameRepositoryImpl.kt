@@ -1,22 +1,87 @@
 package ru.spiridonov.grafin.data.repository
 
-import ru.spiridonov.grafin.domain.entity.GameSettings
-import ru.spiridonov.grafin.domain.entity.Level
+import android.app.Application
+import android.content.Intent
+import android.util.Log
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import ru.spiridonov.grafin.data.mapper.DtoMapper
+import ru.spiridonov.grafin.data.memory.LevelsObjects
+import ru.spiridonov.grafin.data.memory.QuestionsObjects
+import ru.spiridonov.grafin.data.network.ApiService
 import ru.spiridonov.grafin.domain.entity.Question
 import ru.spiridonov.grafin.domain.repository.GameRepository
 import javax.inject.Inject
 
-class GameRepositoryImpl @Inject constructor() : GameRepository {
-    override fun getListQuestions(level: Level): List<Question> {
-        return emptyList()
+class GameRepositoryImpl @Inject constructor(
+    private val application: Application,
+    private val apiService: ApiService,
+    private val dtoMapper: DtoMapper
+) : GameRepository {
+
+    private val localBroadcastManager by lazy {
+        LocalBroadcastManager.getInstance(application)
     }
 
-    override fun getGameSettings(level: Level): GameSettings = when (level.id) {
-        0 -> GameSettings(10, 3, 50, 8)
-        1 -> GameSettings(10, 10, 70, 60)
-        2 -> GameSettings(20, 20, 80, 40)
-        3 -> GameSettings(30, 30, 90, 40)
-        else -> GameSettings(30, 30, 90, 40)
+    override fun getListQuestions(levelId: Int): List<Question> {
+        val questions = mutableListOf<Question>()
+        QuestionsObjects.questionsArray.forEach {
+            if (it.levelId == levelId)
+                questions.add(it)
+        }
+        return questions
+    }
+
+    override fun getGameLevel(id: Int) =
+        LevelsObjects.levelsArray.find { it.id == id }
+
+
+    override fun loadData(result: (Boolean) -> Unit) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+
+                Log.d("getGameSettings", "start")
+                Intent("loaded").apply {
+                    putExtra("status", "in_progress")
+                    localBroadcastManager.sendBroadcast(this)
+                }
+                val levelsJsonContainer = apiService.getLevelsList()
+                val levelsInfoDtoList =
+                    dtoMapper.mapLevelsJsonContainerToListLevelsInfo(levelsJsonContainer)
+                val mapLevels = dtoMapper.mapLevelsJsonContainerToListLevels(levelsInfoDtoList)
+
+                val questionsJsonContainer = apiService.getQuestionsList()
+                val questionsInfoDtoList =
+                    dtoMapper.mapQuestionsJsonContainerToListQuestionsInfo(questionsJsonContainer)
+                val mapQuestions =
+                    dtoMapper.mapQuestionsJsonContainerToListQuestions(questionsInfoDtoList)
+
+                if (mapLevels.isNotEmpty() && mapQuestions.isNotEmpty()) {
+                    LevelsObjects.levelsArray = mapLevels
+                    QuestionsObjects.questionsArray = mapQuestions
+                    Intent("loaded").apply {
+                        putExtra("status", "success")
+                        localBroadcastManager.sendBroadcast(this)
+                    }
+                    result.invoke(true)
+                    return@launch
+                }
+                Intent("loaded").apply {
+                    putExtra("status", "error")
+                    localBroadcastManager.sendBroadcast(this)
+                }
+                result.invoke(false)
+            } catch (e: Exception) {
+                Log.d("getGameSettings", e.message.toString())
+                Intent("loaded").apply {
+                    putExtra("status", "error")
+                    localBroadcastManager.sendBroadcast(this)
+                }
+                result.invoke(false)
+            }
+        }
     }
 
 }

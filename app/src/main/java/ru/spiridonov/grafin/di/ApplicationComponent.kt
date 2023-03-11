@@ -4,6 +4,7 @@ import android.app.Application
 import dagger.BindsInstance
 import dagger.Component
 import ru.spiridonov.grafin.GrafinApp
+import ru.spiridonov.grafin.presentation.*
 
 @ApplicationScope
 @Component(
@@ -15,6 +16,11 @@ import ru.spiridonov.grafin.GrafinApp
 interface ApplicationComponent {
 
     fun inject(application: GrafinApp)
+    fun inject(activity: MainActivity)
+    fun inject(fragment: GameFinishedFragment)
+    fun inject(fragment: GameFragment)
+    fun inject(fragment: WelcomeFragment)
+    fun inject(fragment: ChooseLevelFragment)
 
     @Component.Factory
     interface Factory {

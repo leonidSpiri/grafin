@@ -4,8 +4,8 @@ import ru.spiridonov.grafin.domain.entity.Level
 import ru.spiridonov.grafin.domain.repository.GameRepository
 import javax.inject.Inject
 
-class GetListQuestionsUseCase @Inject constructor(
+class LoadDataUseCase @Inject constructor(
     private val repository: GameRepository
 ) {
-    operator fun invoke(levelId: Int) = repository.getListQuestions(levelId)
+    operator fun invoke(result: (Boolean) -> Unit) = repository.loadData(result)
 }

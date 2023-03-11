@@ -1,15 +1,15 @@
 package ru.spiridonov.grafin.data.network
 
+import com.google.gson.JsonArray
+import com.google.gson.JsonObject
 import retrofit2.http.GET
-import ru.spiridonov.grafin.data.network.models.LevelsJsonContainerDto
-import ru.spiridonov.grafin.data.network.models.QuestionsJsonContainerDto
 
 interface ApiService {
-    @GET("api/levels.json")
+    @GET("api/levels")
     suspend fun getLevelsList(
-    ): LevelsJsonContainerDto
+    ): JsonArray
 
-    @GET("api/questions.json")
+    @GET("api/questions")
     suspend fun getQuestionsList(
-    ): QuestionsJsonContainerDto
+    ): JsonArray
 }
