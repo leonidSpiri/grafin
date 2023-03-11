@@ -49,7 +49,6 @@ class ChooseLevelFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         observeViewModel()
     }
-
     private fun observeViewModel() {
         viewModel.levelsList.observe(viewLifecycleOwner) {
             createButtons(it)

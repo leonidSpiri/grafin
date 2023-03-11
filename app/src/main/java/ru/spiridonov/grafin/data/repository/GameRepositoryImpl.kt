@@ -39,10 +39,8 @@ class GameRepositoryImpl @Inject constructor(
 
 
     override fun loadData(result: (Boolean) -> Unit) {
-        CoroutineScope(Dispatchers.IO).launch {
+        CoroutineScope(Dispatchers.Main).launch {
             try {
-
-                Log.d("getGameSettings", "start")
                 Intent("loaded").apply {
                     putExtra("status", "in_progress")
                     localBroadcastManager.sendBroadcast(this)

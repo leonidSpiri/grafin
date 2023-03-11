@@ -42,6 +42,6 @@
         tools:layout="@layout/fragment_game_finished" >
         <argument
             android:name="gameResult"
-            app:argType="ru.spiridonov.composition.domain.entity.GameResult" />
+            app:argType="ru.spiridonov.grafin.domain.entity.GameResult" />
     </fragment>
 </navigation>
