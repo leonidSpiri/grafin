@@ -13,7 +13,7 @@ import ru.spiridonov.grafin.domain.usecases.LoadDataUseCase
 import javax.inject.Inject
 
 class MainViewModel @Inject constructor(
-    loadDataUseCase: LoadDataUseCase,
+    private val loadDataUseCase: LoadDataUseCase,
     getListQuestionsUseCase: GetListQuestionsUseCase
 ) : ViewModel() {
 
@@ -41,10 +41,6 @@ class MainViewModel @Inject constructor(
     val levelsList: LiveData<List<Level>>
         get() = _levelsList
 
-    private val _progressAnswers = MutableLiveData<String>()
-    val progressAnswers: LiveData<String>
-        get() = _progressAnswers
-
     private val _questionsList = MutableLiveData<List<Question>>()
     val questionsList: LiveData<List<Question>>
         get() = _questionsList
@@ -54,7 +50,8 @@ class MainViewModel @Inject constructor(
         get() = _gameResult
 
 
-    val loadData = loadDataUseCase.invoke { result ->
+    fun loadData() = loadDataUseCase.invoke { result ->
+        _isDataLoadedCorrect.value = result
         if (result) {
             _levelsList.value = LevelsObjects.levelsArray
         }
@@ -67,7 +64,7 @@ class MainViewModel @Inject constructor(
 
     fun chooseAnswer(number: Int) {
         checkAnswer(number)
-        if (countOfAnsweredQuestions == getListQuestions.invoke(levelId).size){
+        if (countOfAnsweredQuestions == getListQuestions.invoke(levelId).size) {
             finishGame()
             return
         }
@@ -75,27 +72,34 @@ class MainViewModel @Inject constructor(
     }
 
     private fun finishGame() {
-        Log.d("finish", "finish")
-        Log.d("finish", countOfAnsweredQuestions.toString())
-        Log.d("finish", countOfRightAnsweredQuestions.toString())
-        Log.d("finish", "finish")
+        val isWin = countOfRightAnsweredQuestions >= countOfAnsweredQuestions - 2
+        val result = GameResult(
+            isWin,
+            countOfRightAnsweredQuestions,
+            countOfAnsweredQuestions,
+            levelId
+        )
+        _gameResult.value = result
     }
-
 
     fun startGame(levelId: Int) {
         this.levelId = levelId
-       _questionsList.value = getListQuestions.invoke(levelId)
+        _questionsList.value = getListQuestions.invoke(levelId)
         countOfAnsweredQuestions = 0
         countOfRightAnsweredQuestions = 0
         generateQuestion()
         _questionsCount.value = 0
     }
 
-    private fun generateQuestion(){
+    fun getLevelsList() {
+        _levelsList.value = LevelsObjects.levelsArray
+    }
+
+    private fun generateQuestion() {
         _question.value = getListQuestions.invoke(levelId)[countOfAnsweredQuestions]
     }
 
-    private fun checkAnswer(answer:Int){
+    private fun checkAnswer(answer: Int) {
         val rightAnswer = getListQuestions.invoke(levelId)[countOfAnsweredQuestions].rightAnswer
         if (rightAnswer == answer)
             countOfRightAnsweredQuestions++

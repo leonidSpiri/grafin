@@ -51,8 +51,8 @@ class MainActivity : AppCompatActivity() {
             try {
                 if (intent?.action == "loaded") {
                     val status = intent.getStringExtra("status")
-                    if (status == "in_progress")
-                        dialog.show()
+                    //if (status == "in_progress")
+                    //    dialog.show()
                     if (status == "success")
                         dialog.dismiss()
                     if (status == "error") {
@@ -84,15 +84,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun observeViewModel() {
-        viewModel.loadData
+        viewModel.loadData()
         viewModel.isDataLoadedCorrect.observe(this) { result ->
             if (result) {
                 println(LevelsObjects.levelsArray)
                 println(QuestionsObjects.questionsArray)
+                dialog.dismiss()
             } else
                 Toast.makeText(this, "Error while downloading the date", Toast.LENGTH_SHORT).show()
+            localBroadcastManager.unregisterReceiver(receiver)
         }
-
     }
 
     private fun broadcastReceiver() {

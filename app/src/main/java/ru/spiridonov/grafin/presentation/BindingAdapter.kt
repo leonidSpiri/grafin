@@ -11,11 +11,6 @@ import ru.spiridonov.grafin.R
 import ru.spiridonov.grafin.domain.entity.GameResult
 import ru.spiridonov.grafin.domain.entity.Question
 
-interface OnOptionCLickListener {
-    fun onOptionClick(option: Int)
-}
-
-
 @BindingAdapter("requiredAnswers")
 fun bindRequiredAnswers(textView: TextView, count: Int) {
     textView.text = String.format(
@@ -35,7 +30,7 @@ fun bindRequiredPercentage(textView: TextView, count: Int) {
 @BindingAdapter("scoreAnswers")
 fun bindScoreAnswers(textView: TextView, count: Int) {
     textView.text = String.format(
-        textView.context.getString(R.string.score_answers),
+        textView.context.getString(R.string.progress_answers),
         count
     )
 }
@@ -66,12 +61,6 @@ fun bindPbSetMax(progressBar: ProgressBar, list: List<Question>) {
 @BindingAdapter("enoughCount")
 fun bindEnoughCount(textView: TextView, stateColor: Boolean) {
     textView.setTextColor(getColorByState(stateColor, textView.context))
-}
-
-@BindingAdapter("enoughPercent")
-fun bindEnoughPercent(progressBar: ProgressBar, stateColor: Boolean) {
-    progressBar.progressTintList =
-        ColorStateList.valueOf(getColorByState(stateColor, progressBar.context))
 }
 
 @BindingAdapter("numberAsText")
