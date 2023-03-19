@@ -21,6 +21,8 @@ interface ApplicationComponent {
     fun inject(fragment: GameFragment)
     fun inject(fragment: WelcomeFragment)
     fun inject(fragment: ChooseLevelFragment)
+    fun inject(fragment: AwardsFragment)
+    fun inject(fragment: LoyaltyFragment)
 
     @Component.Factory
     interface Factory {

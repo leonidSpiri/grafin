@@ -16,18 +16,6 @@
         tools:context=".presentation.GameFragment">
 
         <TextView
-            android:id="@+id/tv_timer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:textColor="@color/purple_700"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="@{viewModel.formattedTime}" />
-
-        <TextView
             android:id="@+id/tv_sum"
             style="@style/QuestionTextStyle"
             android:layout_width="wrap_content"
@@ -95,11 +83,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            app:scoreAnswers="@{viewModel.rightQuestionsCount}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="spread"
+            app:scoreAnswers="@{viewModel.rightQuestionsCount}"
             tools:text="@string/progress_answers" />
 
         <ProgressBar
@@ -114,5 +102,39 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_answers_progress"
             app:pbSetMax="@{viewModel.questionsList}"
             app:pbSetProgress="@{viewModel.questionsCount}" />
+
+        <LinearLayout
+            android:id="@+id/ll_incorrect_answers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:visibility="visible">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/wrong_answer"
+                android:textColor="@color/purple_200"
+                android:textSize="36sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.question.answers.get(viewModel.question.rightAnswer).toString()}"
+                android:textColor="@color/teal_200"
+                android:textSize="24sp" />
+
+            <Button
+                android:id="@+id/btn_next"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/next" />
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

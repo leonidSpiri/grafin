@@ -11,6 +11,12 @@
         <action
             android:id="@+id/action_welcomeFragment_to_chooseLevelFragment"
             app:destination="@id/chooseLevelFragment" />
+        <action
+            android:id="@+id/action_welcomeFragment_to_loyaltyFragment"
+            app:destination="@id/loyaltyFragment" />
+        <action
+            android:id="@+id/action_welcomeFragment_to_awardsFragment"
+            app:destination="@id/awardsFragment" />
     </fragment>
     <fragment
         android:id="@+id/chooseLevelFragment"
@@ -44,4 +50,14 @@
             android:name="gameResult"
             app:argType="ru.spiridonov.grafin.domain.entity.GameResult" />
     </fragment>
+    <fragment
+        android:id="@+id/awardsFragment"
+        android:name="ru.spiridonov.grafin.presentation.AwardsFragment"
+        android:label="fragment_awards"
+        tools:layout="@layout/fragment_awards" />
+    <fragment
+        android:id="@+id/loyaltyFragment"
+        android:name="ru.spiridonov.grafin.presentation.LoyaltyFragment"
+        android:label="fragment_loyalty"
+        tools:layout="@layout/fragment_loyalty" />
 </navigation>

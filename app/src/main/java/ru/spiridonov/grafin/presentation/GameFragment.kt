@@ -55,7 +55,7 @@ class GameFragment : Fragment() {
     }
 
     private fun clickListener() {
-        with(binding){
+        with(binding) {
             tvOption1.setOnClickListener {
                 viewModel!!.chooseAnswer(0)
             }
@@ -76,6 +76,24 @@ class GameFragment : Fragment() {
         viewModel.gameResult.observe(viewLifecycleOwner) {
             launchGameFinishedFragment(it)
         }
+        viewModel.needToShowError.observe(viewLifecycleOwner) {
+            if (it) {
+                changeOptionsVisibility(false)
+                binding.llIncorrectAnswers.visibility = View.VISIBLE
+                binding.btnNext.setOnClickListener {
+                    viewModel.generateQuestion()
+                    binding.llIncorrectAnswers.visibility = View.GONE
+                    changeOptionsVisibility(true)
+                }
+            }
+        }
+    }
+
+    private fun changeOptionsVisibility(visible: Boolean) = with(binding) {
+        tvOption1.visibility = if (visible) View.VISIBLE else View.INVISIBLE
+        tvOption2.visibility = if (visible) View.VISIBLE else View.INVISIBLE
+        tvOption3.visibility = if (visible) View.VISIBLE else View.INVISIBLE
+        tvOption4.visibility = if (visible) View.VISIBLE else View.INVISIBLE
     }
 
     private fun launchGameFinishedFragment(gameResult: GameResult) {

@@ -1,6 +1,5 @@
 package ru.spiridonov.grafin.presentation.viewmodels
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,16 +9,14 @@ import ru.spiridonov.grafin.domain.entity.Level
 import ru.spiridonov.grafin.domain.entity.Question
 import ru.spiridonov.grafin.domain.usecases.GetListQuestionsUseCase
 import ru.spiridonov.grafin.domain.usecases.LoadDataUseCase
+import ru.spiridonov.grafin.util.SharedPref
 import javax.inject.Inject
 
 class MainViewModel @Inject constructor(
     private val loadDataUseCase: LoadDataUseCase,
+    private val sharedPref: SharedPref,
     getListQuestionsUseCase: GetListQuestionsUseCase
 ) : ViewModel() {
-
-    private val _formattedTime = MutableLiveData<String>()
-    val formattedTime: LiveData<String>
-        get() = _formattedTime
 
     private val _questionsCount = MutableLiveData<Int>()
     val questionsCount: LiveData<Int>
@@ -36,6 +33,10 @@ class MainViewModel @Inject constructor(
     private val _isDataLoadedCorrect = MutableLiveData<Boolean>()
     val isDataLoadedCorrect: LiveData<Boolean>
         get() = _isDataLoadedCorrect
+
+    private val _needToShowError = MutableLiveData<Boolean>()
+    val needToShowError: LiveData<Boolean>
+        get() = _needToShowError
 
     private val _levelsList = MutableLiveData<List<Level>>()
     val levelsList: LiveData<List<Level>>
@@ -63,12 +64,14 @@ class MainViewModel @Inject constructor(
     private var levelId = 0
 
     fun chooseAnswer(number: Int) {
-        checkAnswer(number)
+        val isAnswerCorrect = checkAnswer(number)
         if (countOfAnsweredQuestions == getListQuestions.invoke(levelId).size) {
             finishGame()
             return
         }
-        generateQuestion()
+        _needToShowError.value = !isAnswerCorrect
+        if (isAnswerCorrect)
+            generateQuestion()
     }
 
     private fun finishGame() {
@@ -80,6 +83,7 @@ class MainViewModel @Inject constructor(
             levelId
         )
         _gameResult.value = result
+        sharedPref.addScore(result.countOfRightAnswers)
     }
 
     fun startGame(levelId: Int) {
@@ -95,16 +99,20 @@ class MainViewModel @Inject constructor(
         _levelsList.value = LevelsObjects.levelsArray
     }
 
-    private fun generateQuestion() {
+    fun generateQuestion() {
         _question.value = getListQuestions.invoke(levelId)[countOfAnsweredQuestions]
     }
 
-    private fun checkAnswer(answer: Int) {
+    private fun checkAnswer(answer: Int): Boolean {
+        var isAnswerRight = false
         val rightAnswer = getListQuestions.invoke(levelId)[countOfAnsweredQuestions].rightAnswer
-        if (rightAnswer == answer)
+        if (rightAnswer == answer) {
             countOfRightAnsweredQuestions++
+            isAnswerRight = true
+        }
         countOfAnsweredQuestions++
         _rightQuestionsCount.value = countOfRightAnsweredQuestions
         _questionsCount.value = countOfAnsweredQuestions
+        return isAnswerRight
     }
 }

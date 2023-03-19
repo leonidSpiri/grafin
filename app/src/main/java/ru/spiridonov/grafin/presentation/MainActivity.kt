@@ -91,7 +91,7 @@ class MainActivity : AppCompatActivity() {
                 println(QuestionsObjects.questionsArray)
                 dialog.dismiss()
             } else
-                Toast.makeText(this, "Error while downloading the date", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Error while downloading the data", Toast.LENGTH_SHORT).show()
             localBroadcastManager.unregisterReceiver(receiver)
         }
     }

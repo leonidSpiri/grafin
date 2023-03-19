@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true">
@@ -14,17 +14,40 @@
             android:orientation="vertical"
             tools:context=".presentation.WelcomeFragment">
 
+            <Button
+                android:id="@+id/button_awards"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:text="@string/awards"
+                android:layout_margin="5dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/button_loyalty"/>
+
+            <Button
+                android:id="@+id/button_loyalty"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:text="@string/loyalty_program"
+                android:layout_margin="5dp"
+                app:layout_constraintStart_toEndOf="@id/button_awards"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
             <ImageView
                 android:id="@+id/iv_logo"
-                android:layout_width="wrap_content"
+                android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_gravity="center"
-                android:layout_margin="32dp"
+                android:layout_margin="16dp"
                 android:contentDescription="@string/welcome_logo"
+                android:scaleType="centerCrop"
                 android:src="@mipmap/ic_launcher_foreground"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/button_awards" />
 
             <TextView
                 android:id="@+id/tv_title"
@@ -39,15 +62,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:text="I'm Slim Shady, yes, I'm the real Shady
-All you other Slim Shadys, are just imitating
-So won't the real Slim Shady, please stand up?
-Please stand up, please stand up
-'Cause I'm Slim Shady, yes, I'm the real Shady
-All you other Slim Shadys, are just imitating
-So won't the real Slim Shady, please stand up?
-Please stand up, please stand up"
-                android:textSize="16sp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:text="@string/welcome_description"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
             <Button

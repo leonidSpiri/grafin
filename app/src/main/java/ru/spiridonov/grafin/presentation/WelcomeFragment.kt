@@ -36,15 +36,22 @@ class WelcomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.buttonUnderstand.setOnClickListener {
-            launchChooseLevelFragment()
+        buttonClickListener()
+    }
+
+    private fun buttonClickListener() = with(binding) {
+        buttonUnderstand.setOnClickListener {
+            navigateToFragment(R.id.action_welcomeFragment_to_chooseLevelFragment)
+        }
+        buttonAwards.setOnClickListener {
+            navigateToFragment(R.id.action_welcomeFragment_to_awardsFragment)
+        }
+        buttonLoyalty.setOnClickListener {
+            navigateToFragment(R.id.action_welcomeFragment_to_loyaltyFragment)
         }
     }
 
-    private fun launchChooseLevelFragment() {
-        findNavController().navigate(R.id.action_welcomeFragment_to_chooseLevelFragment)
-
-    }
+    private fun navigateToFragment(id: Int) = findNavController().navigate(id)
 
     override fun onDestroyView() {
         super.onDestroyView()

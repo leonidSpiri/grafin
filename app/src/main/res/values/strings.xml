@@ -1,17 +1,13 @@
 <resources>
-    <string name="app_name">Grafin</string>
+    <string name="app_name">ГраФин</string>
     <string name="question_mark">\?</string>
-    <string name="welcome_title">Фин грамотность</string>
+    <string name="welcome_title">Привет!</string>
     <string name="game_rules">
         Правила игры:
     </string>
     <string name="button_understand">Понятно</string>
     <string name="welcome_logo">Welcome logo</string>
     <string name="choose_level_title">Выберите уровень:</string>
-    <string name="easy_level">Легкий</string>
-    <string name="normal_level">Средний</string>
-    <string name="hard_level">Тяжелый</string>
-    <string name="test_level">Тестовый</string>
     <string name="game_over">Game Over</string>
     <string name="score_answers">Ваш счет: %s</string>
     <string name="score_percentage">Процент правильных ответов: %s</string>
@@ -21,4 +17,9 @@
     <string name="required_score">Необходимое количество правильных ответов: %s</string>
     <string name="progress_answers">Правильных ответов: %s</string>
     <string name="update">Загрука</string>
+    <string name="welcome_description">Мы рады, что тебе интересны финансы и ты хочешь узнать что-то новое! Наш проект ГраФин направлен на повышение финансовой грамотности среди школьников, мы постарались сделать все для твоего удобства и интересного обучения. Дерзай, мы верим в твой успех!</string>
+    <string name="wrong_answer">Не правильно!</string>
+    <string name="next">Дальше</string>
+    <string name="awards">Награды</string>
+    <string name="loyalty_program">Программа лояльности</string>
 </resources>

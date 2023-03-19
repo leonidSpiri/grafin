@@ -47,6 +47,7 @@ class GameRepositoryImpl @Inject constructor(
                     localBroadcastManager.sendBroadcast(this)
                 }
                 val levelsJsonContainer = apiService.getLevelsList()
+                Log.d("getGameSettings", "levelsJsonContainer: $levelsJsonContainer")
                 val levelsInfoDtoList =
                     dtoMapper.mapLevelsJsonContainerToListLevelsInfo(levelsJsonContainer)
                 val mapLevels = dtoMapper.mapLevelsJsonContainerToListLevels(levelsInfoDtoList)

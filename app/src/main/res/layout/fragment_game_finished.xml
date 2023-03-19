@@ -19,6 +19,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_margin="48dp"
+            android:visibility="invisible"
             android:contentDescription="@string/game_over"
             app:emojiResult="@{gameResult.winner}"
             app:layout_constraintBottom_toTopOf="@id/tv_required_answers"
@@ -43,35 +44,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@id/tv_required_percentage"
+            app:layout_constraintBottom_toTopOf="@id/button_retry"
             app:layout_constraintEnd_toEndOf="@id/tv_required_answers"
             app:layout_constraintStart_toStartOf="@id/tv_required_answers"
             app:layout_constraintTop_toBottomOf="@id/tv_required_answers"
             app:scoreAnswers="@{gameResult.countOfRightAnswers}" />
 
-        <TextView
-            android:id="@+id/tv_required_percentage"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@id/tv_score_percentage"
-            app:layout_constraintEnd_toEndOf="@id/tv_required_answers"
-            app:layout_constraintStart_toStartOf="@id/tv_required_answers"
-            app:layout_constraintTop_toBottomOf="@id/tv_score_answers"
-            app:layout_constraintVertical_chainStyle="packed" />
-
-        <TextView
-            android:id="@+id/tv_score_percentage"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/tv_required_answers"
-            app:layout_constraintStart_toStartOf="@id/tv_required_answers"
-            app:layout_constraintTop_toBottomOf="@id/tv_required_percentage"
-            app:scorePercentage="@{gameResult}" />
 
         <Button
             android:id="@+id/button_retry"
