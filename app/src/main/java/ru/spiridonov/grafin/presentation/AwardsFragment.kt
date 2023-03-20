@@ -2,17 +2,14 @@ package ru.spiridonov.grafin.presentation
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import ru.spiridonov.grafin.GrafinApp
-import ru.spiridonov.grafin.R
 import ru.spiridonov.grafin.databinding.FragmentAwardsBinding
-import ru.spiridonov.grafin.databinding.FragmentLoyaltyBinding
 import ru.spiridonov.grafin.presentation.viewmodels.AwardsViewModel
-import ru.spiridonov.grafin.presentation.viewmodels.MainViewModel
 import ru.spiridonov.grafin.presentation.viewmodels.ViewModelFactory
 import javax.inject.Inject
 

@@ -35,11 +35,11 @@ fun bindScoreAnswers(textView: TextView, count: Int) {
     )
 }
 
-@BindingAdapter("scorePercentage")
-fun bindScorePercentage(textView: TextView, gameResult: GameResult) {
+@BindingAdapter("score")
+fun bindScore(textView: TextView, score: Int) {
     textView.text = String.format(
         textView.context.getString(R.string.score_answers),
-        getPercentOfRightAnswers(gameResult)
+        score.toString()
     )
 }
 
