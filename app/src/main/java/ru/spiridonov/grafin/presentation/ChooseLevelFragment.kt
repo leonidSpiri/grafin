@@ -1,11 +1,13 @@
 package ru.spiridonov.grafin.presentation
 
+import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -17,7 +19,9 @@ import ru.spiridonov.grafin.presentation.viewmodels.MainViewModel
 import ru.spiridonov.grafin.presentation.viewmodels.ViewModelFactory
 import javax.inject.Inject
 
-class ChooseLevelFragment : Fragment() {
+class ChooseLevelFragment : Fragment(
+
+) {
     private var _binding: FragmentChooseLevelBinding? = null
     private val binding: FragmentChooseLevelBinding
         get() = _binding ?: throw RuntimeException("FragmentChooseLevelBinding == null")
@@ -49,6 +53,7 @@ class ChooseLevelFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         observeViewModel()
     }
+
     private fun observeViewModel() {
         viewModel.getLevelsList()
         viewModel.levelsList.observe(viewLifecycleOwner) {
@@ -63,7 +68,22 @@ class ChooseLevelFragment : Fragment() {
             val inflater = layoutInflater.inflate(R.layout.btn_choose_level_layout, layout, false)
             val buttonLayout = inflater.findViewById<Button>(R.id.button).apply {
                 text = level.name
-                setOnClickListener { launchGameFragment(level) }
+                setOnClickListener {
+                    val builder = AlertDialog.Builder(requireActivity())
+                    builder.setTitle("Прочитать теорию?")
+                    builder.setMessage("Хотели бы вы прочитать теорию перед началом игры?")
+                    builder.setPositiveButton("Да") { _, _ ->
+                        findNavController().navigate(
+                            ChooseLevelFragmentDirections.actionChooseLevelFragmentToTheoryFragment(
+                                level.id
+                            )
+                        )
+                    }
+                    builder.setNegativeButton("Нет") { _, _ ->
+                        launchGameFragment(level)
+                    }
+                    builder.show()
+                }
             }
             layout.addView(buttonLayout)
         }

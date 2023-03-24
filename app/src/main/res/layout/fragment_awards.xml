@@ -23,19 +23,9 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/tv_score"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:score="@{viewModel.score}" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="от 30 баллов"
+                    android:text="Скопировать промокод"
                     android:textSize="18sp"
                     app:layout_constraintBottom_toTopOf="@id/iv_ph_1"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -55,7 +45,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="от 80 баллов"
+                    android:text="Скопировать промокод"
                     android:textSize="18sp"
                     app:layout_constraintBottom_toTopOf="@id/iv_ph_2"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -75,7 +65,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="от 110 баллов"
+                    android:text="Скопировать промокод"
                     android:textSize="18sp"
                     app:layout_constraintBottom_toTopOf="@id/iv_ph_3"
                     app:layout_constraintEnd_toEndOf="parent"

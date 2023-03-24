@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/welcomeFragment"
         android:name="ru.spiridonov.grafin.presentation.WelcomeFragment"
-        android:label="WelcomeFragment" >
+        android:label="WelcomeFragment">
         <action
             android:id="@+id/action_welcomeFragment_to_chooseLevelFragment"
             app:destination="@id/chooseLevelFragment" />
@@ -22,16 +22,19 @@
         android:id="@+id/chooseLevelFragment"
         android:name="ru.spiridonov.grafin.presentation.ChooseLevelFragment"
         android:label="fragment_choose_level"
-        tools:layout="@layout/fragment_choose_level" >
+        tools:layout="@layout/fragment_choose_level">
         <action
             android:id="@+id/action_chooseLevelFragment_to_gameFragment"
             app:destination="@id/gameFragment" />
+        <action
+            android:id="@+id/action_chooseLevelFragment_to_theoryFragment"
+            app:destination="@id/theoryFragment" />
     </fragment>
     <fragment
         android:id="@+id/gameFragment"
         android:name="ru.spiridonov.grafin.presentation.GameFragment"
         android:label="fragment_game"
-        tools:layout="@layout/fragment_game" >
+        tools:layout="@layout/fragment_game">
         <action
             android:id="@+id/action_gameFragment_to_gameFinishedFragment"
             app:destination="@id/gameFinishedFragment"
@@ -45,7 +48,7 @@
         android:id="@+id/gameFinishedFragment"
         android:name="ru.spiridonov.grafin.presentation.GameFinishedFragment"
         android:label="fragment_game_finished"
-        tools:layout="@layout/fragment_game_finished" >
+        tools:layout="@layout/fragment_game_finished">
         <argument
             android:name="gameResult"
             app:argType="ru.spiridonov.grafin.domain.entity.GameResult" />
@@ -60,4 +63,16 @@
         android:name="ru.spiridonov.grafin.presentation.LoyaltyFragment"
         android:label="fragment_loyalty"
         tools:layout="@layout/fragment_loyalty" />
+    <fragment
+        android:id="@+id/theoryFragment"
+        android:name="ru.spiridonov.grafin.presentation.TheoryFragment"
+        android:label="TheoryFragment">
+        <argument
+            android:name="levelId"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_theoryFragment_to_gameFragment"
+            app:destination="@id/gameFragment"
+            app:popUpTo="@id/chooseLevelFragment" />
+    </fragment>
 </navigation>
