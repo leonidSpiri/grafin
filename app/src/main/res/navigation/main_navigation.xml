@@ -17,6 +17,9 @@
         <action
             android:id="@+id/action_welcomeFragment_to_awardsFragment"
             app:destination="@id/awardsFragment" />
+        <action
+            android:id="@+id/action_welcomeFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/chooseLevelFragment"
@@ -75,4 +78,8 @@
             app:destination="@id/gameFragment"
             app:popUpTo="@id/chooseLevelFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="ru.spiridonov.grafin.presentation.ProfileFragment"
+        android:label="ProfileFragment" />
 </navigation>

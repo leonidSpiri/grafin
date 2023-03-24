@@ -49,6 +49,9 @@ class WelcomeFragment : Fragment() {
         buttonLoyalty.setOnClickListener {
             navigateToFragment(R.id.action_welcomeFragment_to_loyaltyFragment)
         }
+        buttonProfile.setOnClickListener {
+            navigateToFragment(R.id.action_welcomeFragment_to_profileFragment)
+        }
     }
 
     private fun navigateToFragment(id: Int) = findNavController().navigate(id)

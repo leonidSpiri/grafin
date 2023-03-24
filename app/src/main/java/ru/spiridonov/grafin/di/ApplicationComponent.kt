@@ -24,6 +24,7 @@ interface ApplicationComponent {
     fun inject(fragment: AwardsFragment)
     fun inject(fragment: LoyaltyFragment)
     fun inject(fragment: TheoryFragment)
+    fun inject(fragment: ProfileFragment)
 
     @Component.Factory
     interface Factory {

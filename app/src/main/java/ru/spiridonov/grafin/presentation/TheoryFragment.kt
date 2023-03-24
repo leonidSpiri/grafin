@@ -55,7 +55,7 @@ class TheoryFragment : Fragment() {
             5 -> R.string.theory_5
             else -> R.string.theory_5
         }
-        binding.tvTheory.text = resources.getString(textId)
+        binding.tvTheory.text = resources.getText(textId)
         binding.buttonUnderstand.setOnClickListener {
             val level = getGameLevelUseCase.invoke(levelId)
             if (level != null)
