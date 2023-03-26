@@ -1,0 +1,32 @@
+[
+   {
+      "id":0,
+      "name":"Финансовые махинации",
+      "description":"good theme 0"
+   },
+   {
+      "id":1,
+      "name":"Инвестиции",
+      "description":"good theme 1"
+   },
+   {
+      "id":2,
+      "name":"Ценные бумаги",
+      "description":"good theme 2"
+   },
+   {
+      "id":3,
+      "name":"Как вести личные финансы",
+      "description":"good theme 3"
+   },
+   {
+      "id":4,
+      "name":"Кредитование",
+      "description":"good theme 4"
+   },
+   {
+      "id":5,
+      "name":"Страхование",
+      "description":"good theme 5"
+   }
+]

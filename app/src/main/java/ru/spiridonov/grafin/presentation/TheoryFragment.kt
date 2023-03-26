@@ -52,6 +52,11 @@ class TheoryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         levelId = args.levelId
         val textId = when (levelId) {
+            0 -> R.string.theory_0
+            1 -> R.string.theory_1
+            2 -> R.string.theory_2
+            3 -> R.string.theory_3
+            4 -> R.string.theory_4
             5 -> R.string.theory_5
             else -> R.string.theory_5
         }
